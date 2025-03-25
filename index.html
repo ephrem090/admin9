@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Enrollment Data</title>
+    <style>
+        /* Styling for Admin Panel */
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://cdn.vectorstock.com/i/500p/82/14/green-background-vector-15738214.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .admin-container {
+            padding: 20px;
+            background-color: white;
+            width: 100%;
+            max-width: 800px; /* Set the maximum width */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .admin-container input {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 300px; /* Set the maximum width for the input */
+        }
+
+        .admin-container .btn {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px; /* Set the maximum width for the button */
+            margin-top: 20px;
+        }
+
+        .admin-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px; /* Added margin for space between tables */
+        }
+
+        .admin-container table,
+        .admin-container th,
+        .admin-container td {
+            border: 1px solid #ddd;
+        }
+
+        .admin-container th,
+        .admin-container td {
+            padding: 15px; /* Increased padding for more space */
+            text-align: left;
+        }
+
+        .admin-container select {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .image-preview {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+
+        .strand-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .strand-table-container {
+            max-height: 400px; /* Set a fixed height for scrollable tables */
+            overflow-y: auto; /* Makes the table scrollable */
+            padding-right: 15px;
+        }
+
+        .scrollable-container {
+            max-height: 500px; /* Set a max height for the whole container to make it scrollable */
+            overflow-y: auto; /* Allows vertical scrolling */
+            width: 100%;
+            padding-right: 10px;
+        }
+
+        /* For centering the login form */
+        .image-btn {
+            height: 100px;
+            width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-container">
+        <img src="C:\Users\ephrem cubita\Downloads\d3ab0c78-b3fc-45cf-944a-50dec7fb9ce1-removebg-preview (1).png" class="image-btn">
+        <h1>Admin/Teacher - Enrollment Data</h1>
+        <input type="password" id="admin-password" placeholder="Enter Admin Password">
+        <button class="btn" id="login-btn">Login</button>
+
+        <div id="data-container" style="display: none;">
+            <h2>View All Submissions:</h2>
+
+            <!-- Scrollable container for all strands -->
+            <div class="scrollable-container">
+                <!-- Strand-based sections -->
+                <div id="stem-section" class="strand-section" style="display: none;">
+                    <h3>STEM (Science, Technology, Engineering, Mathematics)</h3>
+                    <div class="strand-table-container">
+                        <table id="stem-table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Age</th>
+                                    <th>Grade Level</th>
+                                    <th>Guardian</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Grade Card</th>
+                                    <th>Birth Certificate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="abm-section" class="strand-section" style="display: none;">
+                    <h3>ABM (Accountancy, Business, and Management)</h3>
+                    <div class="strand-table-container">
+                        <table id="abm-table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Age</th>
+                                    <th>Grade Level</th>
+                                    <th>Guardian</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Grade Card</th>
+                                    <th>Birth Certificate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="humss-section" class="strand-section" style="display: none;">
+                    <h3>HUMSS (Humanities and Social Sciences)</h3>
+                    <div class="strand-table-container">
+                        <table id="humss-table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Age</th>
+                                    <th>Grade Level</th>
+                                    <th>Guardian</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Grade Card</th>
+                                    <th>Birth Certificate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="gas-section" class="strand-section" style="display: none;">
+                    <h3>GAS (General Academic Strand)</h3>
+                    <div class="strand-table-container">
+                        <table id="gas-table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Age</th>
+                                    <th>Grade Level</th>
+                                    <th>Guardian</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Grade Card</th>
+                                    <th>Birth Certificate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- New Strand Sections -->
+                <div id="ict-section" class="strand-section" style="display: none;">
+                    <h3>ICT (Information and Communications Technology)</h3>
+                    <div class="strand-table-container">
+                        <table id="ict-table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Age</th>
+                                    <th>Grade Level</th>
+                                    <th>Guardian</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Grade Card</th>
+                                    <th>Birth Certificate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="he-section" class="strand-section" style="display: none;">
+                    <h3>HE (Home Economics)</h3>
+                    <div class="strand-table-container">
+                        <table id="he-table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Age</th>
+                                    <th>Grade Level</th>
+                                    <th>Guardian</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Grade Card</th>
+                                    <th>Birth Certificate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-btn').addEventListener('click', function () {
+            const password = document.getElementById('admin-password').value;
+            if (password === 'virginiaramirezcruznationalhighschool') {
+                document.getElementById('data-container').style.display = 'block';
+                document.getElementById('admin-password').disabled = true;
+                document.getElementById('login-btn').disabled = true;
+                loadAllData();
+            } else {
+                alert('Invalid password!');
+            }
+        });
+
+        function loadAllData() {
+            const strands = ['stem', 'abm', 'humss', 'gas', 'ict', 'he'];
+            const tableBodies = {
+                stem: document.getElementById('stem-table').getElementsByTagName('tbody')[0],
+                abm: document.getElementById('abm-table').getElementsByTagName('tbody')[0],
+                humss: document.getElementById('humss-table').getElementsByTagName('tbody')[0],
+                gas: document.getElementById('gas-table').getElementsByTagName('tbody')[0],
+                ict: document.getElementById('ict-table').getElementsByTagName('tbody')[0],
+                he: document.getElementById('he-table').getElementsByTagName('tbody')[0],
+            };
+
+            strands.forEach(strand => {
+                const data = JSON.parse(localStorage.getItem(strand)) || [];
+                if (data.length > 0) {
+                    document.getElementById(`${strand}-section`).style.display = 'block';
+                }
+
+                data.forEach((student, index) => {
+                    const row = tableBodies[strand].insertRow();
+                    row.innerHTML =   
+                        `<td>${student.fullname}</td>
+                        <td>${student.age}</td>
+                        <td>${student.gradeLevel}</td>
+                        <td>${student.guardianName}</td>
+                        <td>${student.email}</td>
+                        <td>${student.phone}</td>
+                        <td>
+                            ${student.gradeCard ? `<a href="uploads/${student.gradeCard}" target="_blank">View File</a>` : 'No file uploaded'}
+                        </td>
+                        <td>
+                            ${student.birthCertificate ? `<a href="uploads/${student.birthCertificate}" target="_blank">View File</a>` : 'No file uploaded'}
+                        </td>
+                        <td>
+                            <button onclick="viewDetails('${strand}', ${index})">View</button>
+                        </td>`;
+                });
+            });
+        }
+
+        function viewDetails(strand, index) {
+            const data = JSON.parse(localStorage.getItem(strand)) || [];
+            const student = data[index];
+            let studentDetails = 
+                `Full Name: ${student.fullname}<br>
+                Date of Birth: ${student.dob}<br>
+                Age: ${student.age}<br>
+                LRN: ${student.lrn}<br>
+                Street: ${student.street}<br>
+                Barangay: ${student.barangay}<br>
+                Municipality: ${student.municipality}<br>
+                Province: ${student.province}<br>
+                Guardian Name: ${student.guardianName}<br>
+                Email: ${student.email}<br>
+                Phone Number: ${student.phone}<br>
+                Parent's Phone: ${student.parentPhone}<br>
+                Grade Level: ${student.gradeLevel}<br>
+                Strand: ${student.strand}<br>`;
+            if (student.gradeCard) {
+                studentDetails += `Grade Card: <a href="uploads/${student.gradeCard}" target="_blank">View File</a><br>`;
+            }
+            if (student.birthCertificate) {
+                studentDetails += `Birth Certificate: <a href="uploads/${student.birthCertificate}" target="_blank">View File</a><br>`;
+            }
+            alert(studentDetails);
+        }
+    </script>
+
+</body>
+
+</html>
+
+
